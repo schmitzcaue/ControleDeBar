@@ -1,14 +1,14 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
-using ControleDeBar.ConsoleApp.ModuloGarcon;
+using ControleDeBar.ConsoleApp.ModuloMesa;
 
-namespace ControleDeBar.ConsoleApp.ModuloMesa;
+namespace ControleDeBar.ConsoleApp.ModuloGarcon;
 
-public class TelaMesa : TelaBase<Mesa>, ITela
+public class TelaGarcon : TelaBase<Garcon>, ITela
 {
-    public TelaMesa(RepositorioMesa repositorioMesa) : base("Mesa", repositorioMesa)
+
+    public TelaGarcon(RepositorioGarcon repositorioGarcon) : base("Garçon", repositorioGarcon)
     {
     }
-
     public override void CadastrarRegistro()
     {
         ExibirCabecalho();
@@ -18,7 +18,7 @@ public class TelaMesa : TelaBase<Mesa>, ITela
 
         Console.WriteLine();
 
-        Mesa novoRegistro = ObterDados();
+        Garcon novoRegistro = (Garcon)ObterDados();
 
         string erros = novoRegistro.Validar();
 
@@ -37,18 +37,16 @@ public class TelaMesa : TelaBase<Mesa>, ITela
 
             return;
         }
-        Mesa[] registros = repositorio.SelecionarRegistros();
+        Garcon[] registros = repositorio.SelecionarRegistros();
 
         for (int i = 0; i < registros.Length; i++)
         {
-            Mesa mesaRegistrada = (Mesa)registros[i];
+            Garcon amigoRegistrado = (Garcon)registros[i];
 
-            if (mesaRegistrada == null)
+            if (amigoRegistrado == null)
                 continue;
 
-            if (mesaRegistrada.Numero == novoRegistro.Numero 
-                || mesaRegistrada.Capacidade == novoRegistro.Capacidade
-                || mesaRegistrada.EstaOcupada == novoRegistro.EstaOcupada)
+            if (amigoRegistrado.Nome == novoRegistro.Nome || amigoRegistrado.Cpf == novoRegistro.Cpf)
             {
                 Console.WriteLine();
 
@@ -101,7 +99,7 @@ public class TelaMesa : TelaBase<Mesa>, ITela
         Console.WriteLine("------------------------------------------");
         Console.ResetColor();
 
-        Mesa registroAtualizado = ObterDados();
+        Garcon registroAtualizado = ObterDados();
 
         string erros = registroAtualizado.Validar();
 
@@ -120,32 +118,27 @@ public class TelaMesa : TelaBase<Mesa>, ITela
 
             return;
         }
-        //Mesa mesaRegistrado = registros[i];
 
-        //if (mesaRegistrado == null)
-        //    continue;
-
-
-
-        
-        Mesa[] registros = repositorio.SelecionarRegistros();
+        Garcon[] registros = repositorio.SelecionarRegistros();
 
         for (int i = 0; i < registros.Length; i++)
         {
-            Mesa mesaRegistrado = registros[i];
+            Garcon garconRegistrado = (Garcon)registros[i];
 
-            if (mesaRegistrado == null)
+            if (garconRegistrado == null)
                 continue;
 
             if (
-          mesaRegistrado.Id != idSelecionado && mesaRegistrado.Numero == registroAtualizado.Numero || mesaRegistrado.Capacidade == registroAtualizado.Capacidade || mesaRegistrado.EstaOcupada == registroAtualizado.EstaOcupada)
-
+                garconRegistrado.Id != idSelecionado &&
+                garconRegistrado.Nome == registroAtualizado.Nome ||
+                garconRegistrado.Cpf == registroAtualizado.Cpf)
+            
             {
                 Console.WriteLine();
 
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("------------------------------------------");
-                Console.WriteLine("Um amigo com este numero ou capacidade já foi cadastrado!");
+                Console.WriteLine("Um amigo com este nome ou telefone já foi cadastrado!");
                 Console.Write("------------------------------------------");
 
                 Console.ResetColor();
@@ -158,7 +151,6 @@ public class TelaMesa : TelaBase<Mesa>, ITela
                 return;
             }
         }
-    
 
         repositorio.EditarRegistro(idSelecionado, registroAtualizado);
 
@@ -179,69 +171,53 @@ public class TelaMesa : TelaBase<Mesa>, ITela
         if (exibirCabecalho)
             ExibirCabecalho();
 
-        Console.WriteLine("Visualização de Mesas");
+        Console.WriteLine("Visualização de Garçons");
 
         Console.WriteLine();
 
         Console.WriteLine(
-            "{0, -10} | {1, -30} | {2, -30}",
-            "Id", "Número", "Capacidade", "Status"
+            "{0, -10} |{0, -15} | {1, -30}",
+            "Id", "Nome", "CPF"
         );
 
-        Mesa[] mesas = repositorio.SelecionarRegistros();
+        Garcon[] garcons = repositorio.SelecionarRegistros();
 
-        for (int i = 0; i < mesas.Length; i++)
+        for (int i = 0; i < garcons.Length; i++)
         {
-            Mesa m = mesas[i];
+            Garcon m = garcons[i];
 
             if (m == null)
                 continue;
 
-            string statusMesa = m.EstaOcupada ? "Ocupada" : "Disponível";
-
             Console.WriteLine(
-              "{0, -10} | {1, -30} | {2, -30}",
-                m.Id, m.Numero, m.Capacidade, statusMesa
+             "{0, -10} |{0, -15} | {1, -30}",
+                m.Id, m.Nome, m.Cpf
             );
         }
 
         ApresentarMensagem("Digite ENTER para continuar...", ConsoleColor.DarkYellow);
     }
-
-    protected override Mesa ObterDados()
+    protected override Garcon ObterDados()
     {
-        bool conseguiuConverterNumero = false;
+        //ajustes
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.Write("Digite o nome do garçon: ");
+        string nome = Console.ReadLine();
+        Console.WriteLine("------------------------------------------");
 
-        int numero = 0;
+        Console.Write("Digite o CPF do garcon: ");
+        string cpf = Console.ReadLine();
+        //int cpf = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("------------------------------------------");
 
-        while (!conseguiuConverterNumero)
-        {
-            Console.Write("Digite o número da mesa: ");
-            conseguiuConverterNumero = int.TryParse(Console.ReadLine(), out numero);
+        Console.ResetColor();
 
-            if (!conseguiuConverterNumero)
-            {
-                ApresentarMensagem("Digite um número válido!", ConsoleColor.DarkYellow);
-                Console.Clear();
-            }
-        }
+        Garcon garcon = new Garcon(nome, cpf);
 
-        bool conseguiuConverterCapacidade = false;
-
-        int capacidade = 0;
-
-        while (!conseguiuConverterCapacidade)
-        {
-            Console.Write("Digite a capacidade da mesa: ");
-            conseguiuConverterCapacidade = int.TryParse(Console.ReadLine(), out capacidade);
-
-            if (!conseguiuConverterNumero)
-            {
-                ApresentarMensagem("Digite um número válido!", ConsoleColor.DarkYellow);
-                Console.Clear();
-            }
-        }
-
-        return new Mesa(numero, capacidade);
+        return garcon;
     }
+
+
+
+
 }
