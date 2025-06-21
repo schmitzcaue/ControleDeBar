@@ -1,6 +1,7 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
 using ControleDeBar.ConsoleApp.ModuloGarcom;
 using ControleDeBar.ConsoleApp.ModuloMesa;
+using ControleDeBar.ConsoleApp.ModuloProdutos;
 
 namespace ControleDeBar.ConsoleApp.ModuloProdutos;
 
@@ -50,9 +51,10 @@ public class TelaProdutos : TelaBase<Produtos>, ITela
 
             if (amigoRegistrado.Nome == novoRegistro.Nome )
             {
+                Console.Clear();
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("------------------------------------------");
+                Console.WriteLine("------------------------------------------");
                 Console.WriteLine("Um produto com este nome já foi cadastrado!");
                 Console.Write("------------------------------------------");
                 Console.ResetColor();
@@ -132,15 +134,14 @@ public class TelaProdutos : TelaBase<Produtos>, ITela
 
             if (
                 garconRegistrado.Id != idSelecionado &&
-                garconRegistrado.Nome == registroAtualizado.Nome ||
-                garconRegistrado.Preco == registroAtualizado.Preco)
+                garconRegistrado.Nome == registroAtualizado.Nome)
             
             {
                 Console.WriteLine();
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("------------------------------------------");
-                Console.WriteLine("Um amigo com este nome ou telefone já foi cadastrado!");
+                Console.WriteLine("------------------------------------------");
+                Console.WriteLine("Um produto com este nome já foi cadastrado!");
                 Console.Write("------------------------------------------");
 
                 Console.ResetColor();
@@ -215,20 +216,20 @@ public class TelaProdutos : TelaBase<Produtos>, ITela
             if (string.IsNullOrWhiteSpace(nome))
             {
                 ApresentarMensagem("Digite um nome válido!", ConsoleColor.DarkYellow);
-                Console.Clear();
+    Console.Clear();
             }
         }
 
-       bool conseguiConverterPreco  = false;
+        bool conseguiuConverterValor = false;
 
         decimal preco = 0.0m;
 
-        while (conseguiConverterPreco)
+        while (!conseguiuConverterValor)
         {
-            Console.Write("Digite o preço do produto: ");
-            conseguiConverterPreco = decimal.TryParse(Console.ReadLine(), out preco);
+            Console.Write("Digite o preco do produto: ");
+            conseguiuConverterValor = decimal.TryParse(Console.ReadLine(), out preco);
 
-            if (conseguiConverterPreco)
+            if (!conseguiuConverterValor)
             {
                 ApresentarMensagem("Digite um preço válido!", ConsoleColor.DarkYellow);
                 Console.Clear();

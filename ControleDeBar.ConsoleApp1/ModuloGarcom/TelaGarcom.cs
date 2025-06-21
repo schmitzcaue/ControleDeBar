@@ -49,7 +49,7 @@ public class TelaGarcom : TelaBase<Garcom>, ITela
                 Console.WriteLine();
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("------------------------------------------");
+                Console.WriteLine("------------------------------------------");
                 Console.WriteLine("Um amigo com este nome ou CPF já foi cadastrado!");
                 Console.Write("------------------------------------------");
                 Console.ResetColor();

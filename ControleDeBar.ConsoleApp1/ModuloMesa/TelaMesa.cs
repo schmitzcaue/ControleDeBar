@@ -40,7 +40,7 @@ public class TelaMesa : TelaBase<Mesa>, ITela
 
         for (int i = 0; i < registros.Length; i++)
         {
-            Mesa mesaRegistrada = (Mesa)registros[i];
+            Mesa mesaRegistrada = registros[i];
 
             if (mesaRegistrada == null)
                 continue;
