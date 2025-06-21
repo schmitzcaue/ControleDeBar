@@ -1,4 +1,5 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
+using ControleDeBar.ConsoleApp.ModuloGarcom;
 using ControleDeBar.ConsoleApp.ModuloMesa;
 
 namespace ControleDeBar.ConsoleApp.ModuloProdutos;
@@ -6,7 +7,7 @@ namespace ControleDeBar.ConsoleApp.ModuloProdutos;
 public class TelaProdutos : TelaBase<Produtos>, ITela
 {
 
-    public TelaProdutos(RepositorioProdutos repositorioProdutos) : base("Produtos", repositorioProdutos)
+    public TelaProdutos(RepositorioProdutos repositorio) : base("Produtos", repositorio)
     {
     }
     public override void CadastrarRegistro()
@@ -50,13 +51,13 @@ public class TelaProdutos : TelaBase<Produtos>, ITela
             if (amigoRegistrado.Nome == novoRegistro.Nome )
             {
                 Console.WriteLine();
-
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Um amigo com este nome já foi cadastrado!");
+                Console.Write("------------------------------------------");
+                Console.WriteLine("Um produto com este nome já foi cadastrado!");
+                Console.Write("------------------------------------------");
                 Console.ResetColor();
 
-                Console.Write("\nDigite ENTER para continuar...");
-                Console.ReadLine();
+                ExibirContinuar();
 
                 CadastrarRegistro();
                 return;
@@ -189,14 +190,14 @@ public class TelaProdutos : TelaBase<Produtos>, ITela
 
         for (int i = 0; i < garcons.Length; i++)
         {
-            Produtos m = garcons[i];
+            Produtos p = garcons[i];
 
-            if (m == null)
+            if (p == null)
                 continue;
 
             Console.WriteLine(
              "{0, -10} |{0, -15} | {1, -30}",
-                m.Id, m.Nome, m.Preco
+                p.Id, p.Nome, p.Preco.ToString("C2")
             );
         }
 
@@ -204,21 +205,36 @@ public class TelaProdutos : TelaBase<Produtos>, ITela
     }
     protected override Produtos ObterDados()
     {
-        //ajustes
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.Write("Digite o nome do produto: ");
-        string nome = Console.ReadLine();
-        Console.WriteLine("------------------------------------------");
+        string nome = string.Empty;
 
-        Console.Write("Digite o preço do produto: ");
-        string preco = Console.ReadLine();
-        //int cpf = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine("------------------------------------------");
+        while (string.IsNullOrWhiteSpace(nome))
+        {
+            Console.Write("Digite o nome do produto: ");
+            nome = Console.ReadLine()!;
 
-        Console.ResetColor();
+            if (string.IsNullOrWhiteSpace(nome))
+            {
+                ApresentarMensagem("Digite um nome válido!", ConsoleColor.DarkYellow);
+                Console.Clear();
+            }
+        }
 
-        Produtos garcon = new Produtos(nome, preco);
+       bool conseguiConverterPreco  = false;
 
-        return garcon;
+        decimal preco = 0.0m;
+
+        while (conseguiConverterPreco)
+        {
+            Console.Write("Digite o preço do produto: ");
+            conseguiConverterPreco = decimal.TryParse(Console.ReadLine(), out preco);
+
+            if (conseguiConverterPreco)
+            {
+                ApresentarMensagem("Digite um preço válido!", ConsoleColor.DarkYellow);
+                Console.Clear();
+            }
+        }
+
+        return new Produtos(nome, preco);
     }
 }

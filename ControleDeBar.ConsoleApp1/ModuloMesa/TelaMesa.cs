@@ -201,7 +201,6 @@ public class TelaMesa : TelaBase<Mesa>, ITela
 
         ApresentarMensagem("Digite ENTER para continuar...", ConsoleColor.DarkYellow);
     }
-
     protected override Mesa ObterDados()
     {
         bool conseguiuConverterNumero = false;
