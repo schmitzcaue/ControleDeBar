@@ -1,65 +1,66 @@
 # ControleDeBar.ConsoleApp1
-# ?? Controle de Bar
+# üçª Controle de Bar üçª
 
-Controle de operaÁıes di·rias de um bar, com gest„o de mesas, garÁons, produtos e contas.
+Controle de opera√ß√µes di√°rias de um bar, com gest√£o de mesas, gar√ßons, produtos e contas.
 
 ---
 
-## ?? Sum·rio
-- [Vis„o Geral](#vis%C3%A3o-geral)  
+## üìã Sum√°rio
+- [Vis√£o Geral](#vis%C3%A3o-geral)  
 - [Funcionalidades](#funcionalidades)  
-- [?? Requisitos](#requisitos)  
-- [?? PrÈ-requisitos](#pr%C3%A9-requisitos)  
-- [?? InstalaÁ„o](#instala%C3%A7%C3%A3o)  
-- [?? Uso](#uso)  
-- [?? ContribuiÁ„o](#contribui%C3%A7%C3%A3o)  
-- [?? LicenÁa](#licen%C3%A7a)
+- [üéØ Requisitos](#requisitos)  
+- [üîß Pr√©-requisitos](#pr%C3%A9-requisitos)  
+- [‚öôÔ∏è Instala√ß√£o](#instala%C3%A7%C3%A3o)  
+- [üöÄ Uso](#uso)  
+- [ü§ù Contribui√ß√£o](#contribui%C3%A7%C3%A3o)  
+- [üìÑ Licen√ßa](#licen%C3%A7a)
+
 
 ---
 
-## Vis„o Geral
+## Vis√£o Geral
 
 Um sistema em C# (console ou web) para gerenciamento completo de um bar:
-- Cadastro de mesas, garÁons e produtos
-- Abertura, modificaÁ„o e fechamento de contas de clientes
+- Cadastro de mesas, gar√ßons e produtos
+- Abertura, modifica√ß√£o e fechamento de contas de clientes
 
 ---
 
 ## Funcionalidades
 
-### MÛdulo Mesas
+### M√≥dulo Mesas
 - Criar, editar, excluir, listar e ver detalhes de mesas  
 - Status: **Livre** / **Ocupada**  
 - Regras:
-  - N˙mero (˙nico, ??1)
+  - N√∫mero (√∫nico, ??1)
   - Lugares (??1)
-  - Status padr„o: Livre
-  - Impede exclus„o se houver pedidos
+  - Status padr√£o: Livre
+  - Impede exclus√£o se houver pedidos
 
-### MÛdulo GarÁons
-- Criar, editar, excluir e listar garÁons  
+### M√≥dulo Gar√ßons
+- Criar, editar, excluir e listar gar√ßons  
 - Regras:
-  - Nome (3ñ100 caracteres)
-  - CPF v·lido (formato XXX.XXX.XXX-XX)
-  - CPF ˙nico
-  - Impede exclus„o se houver pedidos
+  - Nome (3‚Äì100 caracteres)
+  - CPF v√°lido (formato XXX.XXX.XXX-XX)
+  - CPF √∫nico
+  - Impede exclus√£o se houver pedidos
 
-### MÛdulo Produtos
+### M√≥dulo Produtos
 - Criar, editar, excluir e listar produtos  
 - Regras:
-  - Nome (2ñ100 caracteres)
-  - PreÁo (>?0, 2 decimais)
-  - Nome ˙nico
-  - Impede exclus„o se houver pedidos
+  - Nome (2‚Äì100 caracteres)
+  - Pre√ßo (>?0, 2 decimais)
+  - Nome √∫nico
+  - Impede exclus√£o se houver pedidos
 
-### MÛdulo Conta
-- Abrir conta (cliente, mesa, garÁom)
+### M√≥dulo Conta
+- Abrir conta (cliente, mesa, gar√ßom)
 - Adicionar/remover itens (produtos + quantidade)
-- Visualizar faturamento di·rio, contas abertas e encerradas
+- Visualizar faturamento di√°rio, contas abertas e encerradas
 - Fechar contas
 - Regras:
-  - Status: **Aberta** (padr„o) / **Fechada**
-  - C·lculo autom·tico do total da conta e do faturamento di·rio
+  - Status: **Aberta** (padr√£o) / **Fechada**
+  - C√°lculo autom√°tico do total da conta e do faturamento di√°rio
   - Uma conta ativa por mesa
 
 ---
