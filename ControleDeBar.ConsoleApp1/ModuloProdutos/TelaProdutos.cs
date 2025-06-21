@@ -1,24 +1,26 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
 using ControleDeBar.ConsoleApp.ModuloMesa;
 
-namespace ControleDeBar.ConsoleApp.ModuloGarcon;
+namespace ControleDeBar.ConsoleApp.ModuloProdutos;
 
-public class TelaGarcon : TelaBase<Garcon>, ITela
+public class TelaProdutos : TelaBase<Produtos>, ITela
 {
 
-    public TelaGarcon(RepositorioGarcon repositorioGarcon) : base("Garçon", repositorioGarcon)
+    public TelaProdutos(RepositorioProdutos repositorioProdutos) : base("Produtos", repositorioProdutos)
     {
     }
     public override void CadastrarRegistro()
     {
-        ExibirCabecalho();
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.DarkBlue;
         Console.WriteLine("------------------------------------------");
-        Console.WriteLine($"Cadastro de {nomeEntidade}");
+        Console.WriteLine($"             Cadastro de {nomeEntidade}");
         Console.Write("------------------------------------------");
+        Console.ResetColor();
 
         Console.WriteLine();
 
-        Garcon novoRegistro = (Garcon)ObterDados();
+        Produtos novoRegistro = (Produtos)ObterDados();
 
         string erros = novoRegistro.Validar();
 
@@ -30,28 +32,27 @@ public class TelaGarcon : TelaBase<Garcon>, ITela
             Console.WriteLine(erros);
             Console.ResetColor();
 
-            Console.Write("\nDigite ENTER para continuar...");
-            Console.ReadLine();
+            ExibirContinuar();
 
             CadastrarRegistro();
 
             return;
         }
-        Garcon[] registros = repositorio.SelecionarRegistros();
+        Produtos[] registros = repositorio.SelecionarRegistros();
 
         for (int i = 0; i < registros.Length; i++)
         {
-            Garcon amigoRegistrado = (Garcon)registros[i];
+            Produtos amigoRegistrado = (Produtos)registros[i];
 
             if (amigoRegistrado == null)
                 continue;
 
-            if (amigoRegistrado.Nome == novoRegistro.Nome || amigoRegistrado.Cpf == novoRegistro.Cpf)
+            if (amigoRegistrado.Nome == novoRegistro.Nome )
             {
                 Console.WriteLine();
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Um amigo com este nome ou CPF já foi cadastrado!");
+                Console.WriteLine("Um amigo com este nome já foi cadastrado!");
                 Console.ResetColor();
 
                 Console.Write("\nDigite ENTER para continuar...");
@@ -99,7 +100,7 @@ public class TelaGarcon : TelaBase<Garcon>, ITela
         Console.WriteLine("------------------------------------------");
         Console.ResetColor();
 
-        Garcon registroAtualizado = ObterDados();
+        Produtos registroAtualizado = ObterDados();
 
         string erros = registroAtualizado.Validar();
 
@@ -111,19 +112,19 @@ public class TelaGarcon : TelaBase<Garcon>, ITela
             Console.WriteLine(erros);
             Console.ResetColor();
 
-            Console.Write("\nDigite ENTER para continuar...");
-            Console.ReadLine();
+            ExibirContinuar();
+
 
             EditarRegistro();
 
             return;
         }
 
-        Garcon[] registros = repositorio.SelecionarRegistros();
+        Produtos[] registros = repositorio.SelecionarRegistros();
 
         for (int i = 0; i < registros.Length; i++)
         {
-            Garcon garconRegistrado = (Garcon)registros[i];
+            Produtos garconRegistrado = (Produtos)registros[i];
 
             if (garconRegistrado == null)
                 continue;
@@ -131,7 +132,7 @@ public class TelaGarcon : TelaBase<Garcon>, ITela
             if (
                 garconRegistrado.Id != idSelecionado &&
                 garconRegistrado.Nome == registroAtualizado.Nome ||
-                garconRegistrado.Cpf == registroAtualizado.Cpf)
+                garconRegistrado.Preco == registroAtualizado.Preco)
             
             {
                 Console.WriteLine();
@@ -143,8 +144,8 @@ public class TelaGarcon : TelaBase<Garcon>, ITela
 
                 Console.ResetColor();
 
-                Console.Write("\nDigite ENTER para continuar...");
-                Console.ReadLine();
+                ExibirContinuar();
+
 
                 EditarRegistro();
 
@@ -171,53 +172,53 @@ public class TelaGarcon : TelaBase<Garcon>, ITela
         if (exibirCabecalho)
             ExibirCabecalho();
 
-        Console.WriteLine("Visualização de Garçons");
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.DarkBlue;
+        Console.WriteLine("------------------------------------------");
+        Console.WriteLine("Visualização de Produtos");
+        Console.WriteLine("------------------------------------------");
 
-        Console.WriteLine();
+
 
         Console.WriteLine(
             "{0, -10} |{0, -15} | {1, -30}",
-            "Id", "Nome", "CPF"
+            "Id", "Nome", "Preço"
         );
 
-        Garcon[] garcons = repositorio.SelecionarRegistros();
+        Produtos[] garcons = repositorio.SelecionarRegistros();
 
         for (int i = 0; i < garcons.Length; i++)
         {
-            Garcon m = garcons[i];
+            Produtos m = garcons[i];
 
             if (m == null)
                 continue;
 
             Console.WriteLine(
              "{0, -10} |{0, -15} | {1, -30}",
-                m.Id, m.Nome, m.Cpf
+                m.Id, m.Nome, m.Preco
             );
         }
 
         ApresentarMensagem("Digite ENTER para continuar...", ConsoleColor.DarkYellow);
     }
-    protected override Garcon ObterDados()
+    protected override Produtos ObterDados()
     {
         //ajustes
         Console.ForegroundColor = ConsoleColor.White;
-        Console.Write("Digite o nome do garçon: ");
+        Console.Write("Digite o nome do produto: ");
         string nome = Console.ReadLine();
         Console.WriteLine("------------------------------------------");
 
-        Console.Write("Digite o CPF do garcon: ");
-        string cpf = Console.ReadLine();
+        Console.Write("Digite o preço do produto: ");
+        string preco = Console.ReadLine();
         //int cpf = Convert.ToInt32(Console.ReadLine());
         Console.WriteLine("------------------------------------------");
 
         Console.ResetColor();
 
-        Garcon garcon = new Garcon(nome, cpf);
+        Produtos garcon = new Produtos(nome, preco);
 
         return garcon;
     }
-
-
-
-
 }

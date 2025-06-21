@@ -1,4 +1,6 @@
-﻿namespace ControleDeBar.ConsoleApp.Compartilhado;
+﻿using System.Runtime.ConstrainedExecution;
+
+namespace ControleDeBar.ConsoleApp.Compartilhado;
 
 public abstract class TelaBase<Tipo> where Tipo : EntidadeBase<Tipo>
 {
@@ -143,6 +145,18 @@ public abstract class TelaBase<Tipo> where Tipo : EntidadeBase<Tipo>
         Console.WriteLine("|           Controle de Bar            |");
         Console.WriteLine("----------------------------------------");
         Console.WriteLine();
+    }
+    protected void ExibirContinuar()
+    {
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+
+        Console.WriteLine();
+        Console.Write("------------------------------------------");
+        Console.WriteLine("\nDigite ENTER para continuar...");
+        Console.Write("------------------------------------------");
+        Console.ReadLine();
+        Console.ResetColor();
+
     }
 
     protected void ApresentarMensagem(string mensagem, ConsoleColor cor)

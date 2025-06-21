@@ -1,14 +1,13 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
-using ControleDeBar.ConsoleApp.ModuloGarcom;
 
-namespace ControleDeBar.ConsoleApp.ModuloMesa;
+namespace ControleDeBar.ConsoleApp.ModuloGarcom;
 
-public class TelaMesa : TelaBase<Mesa>, ITela
+public class TelaGarcom : TelaBase<Garcom>, ITela
 {
-    public TelaMesa(RepositorioMesa repositorioMesa) : base("Mesa", repositorioMesa)
+
+    public TelaGarcom(RepositorioGarcom repositorioGarcom) : base("Garçom", repositorioGarcom)
     {
     }
-
     public override void CadastrarRegistro()
     {
         ExibirCabecalho();
@@ -18,7 +17,7 @@ public class TelaMesa : TelaBase<Mesa>, ITela
 
         Console.WriteLine();
 
-        Mesa novoRegistro = ObterDados();
+        Garcom novoRegistro = (Garcom)ObterDados();
 
         string erros = novoRegistro.Validar();
 
@@ -36,24 +35,23 @@ public class TelaMesa : TelaBase<Mesa>, ITela
 
             return;
         }
-        Mesa[] registros = repositorio.SelecionarRegistros();
+        Garcom[] registros = repositorio.SelecionarRegistros();
 
         for (int i = 0; i < registros.Length; i++)
         {
-            Mesa mesaRegistrada = (Mesa)registros[i];
+            Garcom garcomRegistrado = (Garcom)registros[i];
 
-            if (mesaRegistrada == null)
+            if (garcomRegistrado == null)
                 continue;
 
-            if (mesaRegistrada.Numero == novoRegistro.Numero || mesaRegistrada.EstaOcupada == novoRegistro.EstaOcupada)
+            if (garcomRegistrado.Nome == novoRegistro.Nome || garcomRegistrado.Cpf == novoRegistro.Cpf)
             {
                 Console.WriteLine();
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("------------------------------------------");
-                Console.WriteLine("Uma mesa com este número já foi cadastrado!");
                 Console.Write("------------------------------------------");
-
+                Console.WriteLine("Um amigo com este nome ou CPF já foi cadastrado!");
+                Console.Write("------------------------------------------");
                 Console.ResetColor();
 
                 ExibirContinuar();
@@ -100,7 +98,7 @@ public class TelaMesa : TelaBase<Mesa>, ITela
         Console.WriteLine("------------------------------------------");
         Console.ResetColor();
 
-        Mesa registroAtualizado = ObterDados();
+        Garcom registroAtualizado = ObterDados();
 
         string erros = registroAtualizado.Validar();
 
@@ -118,24 +116,27 @@ public class TelaMesa : TelaBase<Mesa>, ITela
 
             return;
         }
-        Mesa[] registros = repositorio.SelecionarRegistros();
+
+        Garcom[] registros = repositorio.SelecionarRegistros();
 
         for (int i = 0; i < registros.Length; i++)
         {
-            Mesa mesaRegistrado = registros[i];
+            Garcom garcomRegistrado = (Garcom)registros[i];
 
-            if (mesaRegistrado == null)
+            if (garcomRegistrado == null)
                 continue;
 
             if (
-          mesaRegistrado.Id != idSelecionado && mesaRegistrado.Numero == registroAtualizado.Numero || mesaRegistrado.Capacidade == registroAtualizado.Capacidade || mesaRegistrado.EstaOcupada == registroAtualizado.EstaOcupada)
+                garcomRegistrado.Id != idSelecionado &&
+                garcomRegistrado.Nome == registroAtualizado.Nome ||
+                garcomRegistrado.Cpf == registroAtualizado.Cpf)
 
             {
                 Console.WriteLine();
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("------------------------------------------");
-                Console.WriteLine("Uma mesa com este número já foi cadastrado!");
+                Console.Write("------------------------------------------");
+                Console.WriteLine("Um garçom com este nome ou CPF já foi cadastrado!");
                 Console.Write("------------------------------------------");
 
                 Console.ResetColor();
@@ -147,7 +148,6 @@ public class TelaMesa : TelaBase<Mesa>, ITela
                 return;
             }
         }
-    
 
         repositorio.EditarRegistro(idSelecionado, registroAtualizado);
 
@@ -172,70 +172,64 @@ public class TelaMesa : TelaBase<Mesa>, ITela
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkBlue;
         Console.WriteLine("------------------------------------------");
-        Console.WriteLine("Visualização de Mesas");
+        Console.WriteLine("Visualização de Garçom");
         Console.WriteLine("------------------------------------------");
 
 
 
         Console.WriteLine(
-            "{0, -10} | {1, -30} | {2, -30}",
-            "Id", "Número", "Capacidade", "Status"
+            "{0, -10} |{0, -15} | {1, -30}",
+            "Id", "Nome", "CPF"
         );
 
-        Mesa[] mesas = repositorio.SelecionarRegistros();
+        Garcom[] garcoms = repositorio.SelecionarRegistros();
 
-        for (int i = 0; i < mesas.Length; i++)
+        for (int i = 0; i < garcoms.Length; i++)
         {
-            Mesa m = mesas[i];
+            Garcom g = garcoms[i];
 
-            if (m == null)
+            if (g == null)
                 continue;
 
-            string statusMesa = m.EstaOcupada ? "Ocupada" : "Disponível";
-
             Console.WriteLine(
-              "{0, -10} | {1, -30} | {2, -30}",
-                m.Id, m.Numero, m.Capacidade, statusMesa
+             "{0, -10} |{0, -15} | {1, -30}",
+                g.Id, g.Nome, g.Cpf
             );
         }
 
         ApresentarMensagem("Digite ENTER para continuar...", ConsoleColor.DarkYellow);
     }
-
-    protected override Mesa ObterDados()
+    protected override Garcom ObterDados()
     {
-        bool conseguiuConverterNumero = false;
+        string nome = string.Empty;
 
-        int numero = 0;
-
-        while (!conseguiuConverterNumero)
+        while (string.IsNullOrWhiteSpace(nome))
         {
-            Console.Write("Digite o número da mesa: ");
-            conseguiuConverterNumero = int.TryParse(Console.ReadLine(), out numero);
+            Console.Write("Digite o nome do garçom: ");
+            nome = Console.ReadLine()!;
 
-            if (!conseguiuConverterNumero)
+            if (string.IsNullOrWhiteSpace(nome))
             {
-                ApresentarMensagem("Digite um número válido!", ConsoleColor.DarkYellow);
+                ApresentarMensagem("Digite um nome válido!", ConsoleColor.DarkYellow);
                 Console.Clear();
             }
         }
 
-        bool conseguiuConverterCapacidade = false;
+        string cpf = string.Empty;
 
-        int capacidade = 0;
-
-        while (!conseguiuConverterCapacidade)
+        while (string.IsNullOrWhiteSpace(cpf))
         {
-            Console.Write("Digite a capacidade da mesa: ");
-            conseguiuConverterCapacidade = int.TryParse(Console.ReadLine(), out capacidade);
+            Console.Write("Digite o CPF do garçom: ");
+            cpf = Console.ReadLine()!;
 
-            if (!conseguiuConverterNumero)
+            if (string.IsNullOrWhiteSpace(cpf))
             {
-                ApresentarMensagem("Digite um número válido!", ConsoleColor.DarkYellow);
+                ApresentarMensagem("Digite um CPF válido!", ConsoleColor.DarkYellow);
                 Console.Clear();
             }
         }
 
-        return new Mesa(numero, capacidade);
+        return new Garcom(nome, cpf);
     }
+
 }
