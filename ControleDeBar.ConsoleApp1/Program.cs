@@ -1,9 +1,9 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
-using ControleDeBar.ConsoleApp.ModuloMesa;
+using ControleDeBar.ConsoleApp.ModuloConta;
 
-namespace ControleDeBar.ConsoleApp
+namespace ControleDeBar.ConsoleApp2
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
@@ -23,15 +23,37 @@ namespace ControleDeBar.ConsoleApp
                 if (char.ToUpper(opcaoEscolhida) == 'S')
                     break;
 
-                switch (opcaoEscolhida)
+                if (telaEscolhida is TelaConta telaConta)
                 {
-                    case '1': telaEscolhida.CadastrarRegistro(); break;
+                    switch (opcaoEscolhida)
+                    {
+                        case '1': telaConta.CadastrarRegistro(); break;
 
-                    case '2': telaEscolhida.EditarRegistro(); break;
+                        case '2': telaConta.EditarRegistro(); break;
 
-                    case '3': telaEscolhida.ExcluirRegistro(); break;
+                        case '3': telaConta.ApresentarMenuGestaoPedidos(); break;
 
-                    case '4': telaEscolhida.VisualizarRegistros(true); break;
+                        case '4': telaConta.VisualizarRegistros(true); break;
+
+                        case '5': telaConta.VisualizarContasEmAberto(); break;
+
+                        case '6': telaConta.VisualizarContasFechadas(); break;
+
+                        case '7': telaConta.VisualizarFaturamentoDiario(); break;
+                    }
+                }
+                else
+                {
+                    switch (opcaoEscolhida)
+                    {
+                        case '1': telaEscolhida.CadastrarRegistro(); break;
+
+                        case '2': telaEscolhida.EditarRegistro(); break;
+
+                        case '3': telaEscolhida.ExcluirRegistro(); break;
+
+                        case '4': telaEscolhida.VisualizarRegistros(true); break;
+                    }
                 }
             }
         }
