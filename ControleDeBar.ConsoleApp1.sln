@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Infraestrutura", "3. Inf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeBar.Infraestrutura.Memoria", "ControleDeBar.Infraestrutura.Memoria\ControleDeBar.Infraestrutura.Memoria.csproj", "{EF699DB5-45D0-4B05-8C22-9348B60AA273}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeBar.Infraestrutura.Arquivos", "ControleDeBar.Infraestrutura.Arquivos\ControleDeBar.Infraestrutura.Arquivos.csproj", "{99CC503A-E2DC-4FF4-BB8E-D7E6AAA40258}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{EF699DB5-45D0-4B05-8C22-9348B60AA273}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF699DB5-45D0-4B05-8C22-9348B60AA273}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF699DB5-45D0-4B05-8C22-9348B60AA273}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99CC503A-E2DC-4FF4-BB8E-D7E6AAA40258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99CC503A-E2DC-4FF4-BB8E-D7E6AAA40258}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99CC503A-E2DC-4FF4-BB8E-D7E6AAA40258}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99CC503A-E2DC-4FF4-BB8E-D7E6AAA40258}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +47,7 @@ Global
 		{EB08C870-590D-467C-94A9-9D8E8D000964} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{9B376C25-76FB-4AF2-A505-9F7F2E9A1430} = {0065C928-4D51-4A49-B684-11CCD9FD31E2}
 		{EF699DB5-45D0-4B05-8C22-9348B60AA273} = {564685E6-BE98-489F-8C3B-E0090A400FC6}
+		{99CC503A-E2DC-4FF4-BB8E-D7E6AAA40258} = {564685E6-BE98-489F-8C3B-E0090A400FC6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92EEB372-948F-4DA8-9F10-EBED689F9EE4}
