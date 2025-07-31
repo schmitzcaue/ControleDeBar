@@ -1,6 +1,6 @@
-using ControleDeBar.ConsoleApp.ModuloProduto;
+using ControleDeBar.Dominio.ModuloProduto;
 
-namespace ControleDeBar.ConsoleApp.ModuloConta;
+namespace ControleDeBar.Dominio.ModuloConta;
 
 public class Pedido
 {
@@ -19,7 +19,7 @@ public class Pedido
 
     public decimal CalcularTotalParcial()
     {
-        return Produto.Valor * QuantidadeSolicitada;
+        return Produto.Preco * QuantidadeSolicitada;
     }
 
     public override string ToString()

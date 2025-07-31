@@ -1,6 +1,13 @@
 ﻿using ControleDeBar.ConsoleApp.ModuloGarcom;
 using ControleDeBar.ConsoleApp.ModuloMesa;
-using ControleDeBar.ConsoleApp.ModuloProdutos;
+using ControleDeBar.ConsoleApp.ModuloProduto;
+using ControleDeBar.Dominio.ModuloGarcom;
+using ControleDeBar.Dominio.ModuloMesa;
+using ControleDeBar.Dominio.ModuloProduto;
+using ControleDeBar.Infraestrutura.Memoria.ModuloConta;
+using ControleDeBar.Infraestrutura.Memoria.ModuloGarcom;
+using ControleDeBar.Infraestrutura.Memoria.ModuloMesa;
+using ControleDeBar.Infraestrutura.Memoria.ModuloProduto;
 
 namespace ControleDeBar.ConsoleApp.Compartilhado;
 
@@ -14,18 +21,18 @@ public class TelaPrincipal
     private RepositorioGarcom repositorioGarcon;
     private TelaGarcom telaGarcon;
 
-    private RepositorioProdutos repositorioProdutos;
-    private TelaProdutos telaProdutos;
+    private RepositorioProduto repositorioProdutos;
+    private TelaProduto telaProdutos;
 
     public TelaPrincipal()
     {
         repositorioMesa = new RepositorioMesa();
         repositorioGarcon = new RepositorioGarcom();
-        repositorioProdutos = new RepositorioProdutos();
+        repositorioProdutos = new RepositorioProduto();
 
         telaMesa = new TelaMesa(repositorioMesa);
         telaGarcon = new TelaGarcom(repositorioGarcon);
-        telaProdutos = new TelaProdutos(repositorioProdutos);
+        telaProdutos = new TelaProduto(repositorioProdutos);
     }
 
     public void ApresentarMenuPrincipal()

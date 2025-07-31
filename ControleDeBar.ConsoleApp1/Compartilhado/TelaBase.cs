@@ -1,4 +1,5 @@
-﻿using System.Runtime.ConstrainedExecution;
+﻿using ControleDeBar.Dominio.Compartilhado;
+using ControleDeBar.Infraestrutura.Memoria.Compartilhado;
 
 namespace ControleDeBar.ConsoleApp.Compartilhado;
 

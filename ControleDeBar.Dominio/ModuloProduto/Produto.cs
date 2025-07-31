@@ -1,19 +1,18 @@
-﻿using System.Text.RegularExpressions;
-using ControleDeBar.ConsoleApp.Compartilhado;
+﻿using ControleDeBar.Dominio.Compartilhado;
 
-namespace ControleDeBar.ConsoleApp.ModuloProdutos;
+namespace ControleDeBar.Dominio.ModuloProduto;
 
-public class Produtos : EntidadeBase<Produtos>
+public class Produto : EntidadeBase<Produto>
 {
     public string Nome { get; set; }
     public decimal Preco { get; set; }
 
-    public Produtos(string nome, decimal preco)
+    public Produto(string nome, decimal preco)
     {
         Nome = nome;
         Preco = preco;
     }
-    public override void AtualizarRegistro(Produtos registroAtualizado)
+    public override void AtualizarRegistro(Produto registroAtualizado)
     {
         Nome = registroAtualizado.Nome;
         Preco = registroAtualizado.Preco;

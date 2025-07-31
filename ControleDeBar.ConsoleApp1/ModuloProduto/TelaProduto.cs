@@ -1,14 +1,13 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
-using ControleDeBar.ConsoleApp.ModuloGarcom;
-using ControleDeBar.ConsoleApp.ModuloMesa;
-using ControleDeBar.ConsoleApp.ModuloProdutos;
+using ControleDeBar.Dominio.ModuloProduto;
+using ControleDeBar.Infraestrutura.Memoria.ModuloProduto;
 
-namespace ControleDeBar.ConsoleApp.ModuloProdutos;
+namespace ControleDeBar.ConsoleApp.ModuloProduto;
 
-public class TelaProdutos : TelaBase<Produtos>, ITela
+public class TelaProduto : TelaBase<Produto>, ITela
 {
 
-    public TelaProdutos(RepositorioProdutos repositorio) : base("Produtos", repositorio)
+    public TelaProduto(RepositorioProduto repositorio) : base("Produtos", repositorio)
     {
     }
     public override void CadastrarRegistro()
@@ -22,7 +21,7 @@ public class TelaProdutos : TelaBase<Produtos>, ITela
 
         Console.WriteLine();
 
-        Produtos novoRegistro = (Produtos)ObterDados();
+        Produto novoRegistro = (Produto)ObterDados();
 
         string erros = novoRegistro.Validar();
 
@@ -40,11 +39,11 @@ public class TelaProdutos : TelaBase<Produtos>, ITela
 
             return;
         }
-        Produtos[] registros = repositorio.SelecionarRegistros();
+        Produto[] registros = repositorio.SelecionarRegistros();
 
         for (int i = 0; i < registros.Length; i++)
         {
-            Produtos amigoRegistrado = (Produtos)registros[i];
+            Produto amigoRegistrado = (Produto)registros[i];
 
             if (amigoRegistrado == null)
                 continue;
@@ -103,7 +102,7 @@ public class TelaProdutos : TelaBase<Produtos>, ITela
         Console.WriteLine("------------------------------------------");
         Console.ResetColor();
 
-        Produtos registroAtualizado = ObterDados();
+        Produto registroAtualizado = ObterDados();
 
         string erros = registroAtualizado.Validar();
 
@@ -123,11 +122,11 @@ public class TelaProdutos : TelaBase<Produtos>, ITela
             return;
         }
 
-        Produtos[] registros = repositorio.SelecionarRegistros();
+        Produto[] registros = repositorio.SelecionarRegistros();
 
         for (int i = 0; i < registros.Length; i++)
         {
-            Produtos garconRegistrado = (Produtos)registros[i];
+            Produto garconRegistrado = (Produto)registros[i];
 
             if (garconRegistrado == null)
                 continue;
@@ -187,11 +186,11 @@ public class TelaProdutos : TelaBase<Produtos>, ITela
             "Id", "Nome", "Preço"
         );
 
-        Produtos[] garcons = repositorio.SelecionarRegistros();
+        Produto[] garcons = repositorio.SelecionarRegistros();
 
         for (int i = 0; i < garcons.Length; i++)
         {
-            Produtos p = garcons[i];
+            Produto p = garcons[i];
 
             if (p == null)
                 continue;
@@ -204,7 +203,7 @@ public class TelaProdutos : TelaBase<Produtos>, ITela
 
         ApresentarMensagem("Digite ENTER para continuar...", ConsoleColor.DarkYellow);
     }
-    protected override Produtos ObterDados()
+    protected override Produto ObterDados()
     {
         string nome = string.Empty;
 
@@ -236,6 +235,6 @@ public class TelaProdutos : TelaBase<Produtos>, ITela
             }
         }
 
-        return new Produtos(nome, preco);
+        return new Produto(nome, preco);
     }
 }

@@ -1,9 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35828.75 d17.13
+VisualStudioVersion = 17.13.35828.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeBar.ConsoleApp1", "ControleDeBar.ConsoleApp1\ControleDeBar.ConsoleApp1.csproj", "{EB08C870-590D-467C-94A9-9D8E8D000964}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Apresentação", "1. Apresentação", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Domínio", "2. Domínio", "{0065C928-4D51-4A49-B684-11CCD9FD31E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeBar.Dominio", "ControleDeBar.Dominio\ControleDeBar.Dominio.csproj", "{9B376C25-76FB-4AF2-A505-9F7F2E9A1430}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Infraestrutura", "3. Infraestrutura", "{564685E6-BE98-489F-8C3B-E0090A400FC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeBar.Infraestrutura.Memoria", "ControleDeBar.Infraestrutura.Memoria\ControleDeBar.Infraestrutura.Memoria.csproj", "{EF699DB5-45D0-4B05-8C22-9348B60AA273}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +25,22 @@ Global
 		{EB08C870-590D-467C-94A9-9D8E8D000964}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB08C870-590D-467C-94A9-9D8E8D000964}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB08C870-590D-467C-94A9-9D8E8D000964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B376C25-76FB-4AF2-A505-9F7F2E9A1430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B376C25-76FB-4AF2-A505-9F7F2E9A1430}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B376C25-76FB-4AF2-A505-9F7F2E9A1430}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B376C25-76FB-4AF2-A505-9F7F2E9A1430}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF699DB5-45D0-4B05-8C22-9348B60AA273}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF699DB5-45D0-4B05-8C22-9348B60AA273}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF699DB5-45D0-4B05-8C22-9348B60AA273}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF699DB5-45D0-4B05-8C22-9348B60AA273}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EB08C870-590D-467C-94A9-9D8E8D000964} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{9B376C25-76FB-4AF2-A505-9F7F2E9A1430} = {0065C928-4D51-4A49-B684-11CCD9FD31E2}
+		{EF699DB5-45D0-4B05-8C22-9348B60AA273} = {564685E6-BE98-489F-8C3B-E0090A400FC6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92EEB372-948F-4DA8-9F10-EBED689F9EE4}
