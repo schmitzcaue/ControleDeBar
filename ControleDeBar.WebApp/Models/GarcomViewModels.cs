@@ -1,34 +1,76 @@
 ﻿using ControleDeBar.Dominio.ModuloGarcom;
-using ControleDeBar.Dominio.ModuloGarcom;
 using System.ComponentModel.DataAnnotations;
 
 namespace ControleDeBar.WebApp.Models;
 
 public class CadastrarGarcomViewModel
 {
-    [Range(1, 1000, ErrorMessage = "O campo \"Número\" precisa conter um valor entre 1 e 1000.")]
-    public int Numero { get; set; }
+    [Required(ErrorMessage = "O campo \"Nome\" é obrigatório.")]
+    [MinLength(2, ErrorMessage = "O campo \"Nome\" deve conter ao menos 2 caracteres.")]
+    public string Nome { get; set; }
 
-    [Range(1, 1000, ErrorMessage = "O campo \"Capacidade de Lugares\" precisa conter um valor entre 1 e 1000.")]
-    public int Capacidade { get; set; }
+    [Required(ErrorMessage = "O campo \"CPF\" é obrigatório.")]
+    [RegularExpression(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$",
+        ErrorMessage = "O campo \"CPF\" deve seguir o formato XXX.XXX.XXX-XX.")]
+    public string Cpf { get; set; }
 
     public CadastrarGarcomViewModel()
     {
     }
 }
+public class EditarGarcomViewModel
+{
+    public int Id { get; set; }
 
-public class VisualizarGarcomViewModel
+    [Required(ErrorMessage = "O campo \"Nome\" é obrigatório.")]
+    [MinLength(2, ErrorMessage = "O campo \"Nome\" deve conter ao menos 2 caracteres.")]
+    public string Nome { get; set; }
+
+    [Required(ErrorMessage = "O campo \"CPF\" é obrigatório.")]
+    [RegularExpression(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$",
+        ErrorMessage = "O campo \"CPF\" deve seguir o formato XXX.XXX.XXX-XX.")]
+    public string Cpf { get; set; }
+
+    public EditarGarcomViewModel()
+    {
+    }
+
+    public EditarGarcomViewModel(int id, string nome, string cpf)
+    {
+        Id = id;
+        Nome = nome;
+        Cpf = cpf;
+    }
+}
+
+public class ExcluirGarcomViewModel
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
+
+    public ExcluirGarcomViewModel()
+    {
+    }
+
+    public ExcluirGarcomViewModel(int id, string nome)
+    {
+        Id = id;
+        Nome = nome;
+    }
+}
+
+public class VisualizarGarconsViewModel
 {
     public List<DetalhesGarcomViewModel> Registros { get; set; } = new List<DetalhesGarcomViewModel>();
 
-    public VisualizarGarcomViewModel(List<Garcom> garcons)
+    public VisualizarGarconsViewModel(List<Garcom> garcons)
     {
-        foreach (Garcom g in garcons)
+        foreach (Garcom garcom in garcons)
         {
-            DetalhesMesaViewModel detalhesVm = new DetalhesGarcomViewModel(
-                g.Id,
-                g.Nome,
-                g.Cpf
+            DetalhesGarcomViewModel detalhesVm = new DetalhesGarcomViewModel(
+                garcom.Id,
+                garcom.Nome,
+                garcom.Cpf
             );
 
             Registros.Add(detalhesVm);
@@ -39,10 +81,10 @@ public class VisualizarGarcomViewModel
 public class DetalhesGarcomViewModel
 {
     public int Id { get; set; }
-    public int Nome { get; set; }
-    public int Cpf { get; set; }
+    public string Nome { get; set; }
+    public string Cpf { get; set; }
 
-    public DetalhesGarcomViewModel(int id, int nome, int cpf)
+    public DetalhesGarcomViewModel(int id, string nome, string cpf)
     {
         Id = id;
         Nome = nome;

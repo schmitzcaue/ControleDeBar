@@ -1,21 +1,21 @@
 ﻿@{
-    ViewBag.Titulo = "Cadastro de Mesa";
+    ViewBag.Titulo = "Edição de Garçom";
 }
 
-@model CadastrarMesaViewModel;
+@model EditarGarcomViewModel;
 
 <div class="row justify-content-center">
-    <form class="col-6" asp-action="Cadastrar" method="post">
+    <form class="col-6" asp-action="Editar" method="post">
         <div class="mb-3">
-            <label asp-for="Numero" class="form-label">Número</label>
-            <input class="form-control" asp-for="Numero">
-            <span asp-validation-for="Numero" class="text-danger"></span>
+            <label asp-for="Nome" class="form-label">Nome</label>
+            <input class="form-control" asp-for="Nome">
+            <span asp-validation-for="Nome" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
-            <label asp-for="Capacidade" class="form-label">Capacidade de Lugares</label>
-            <input class="form-control" asp-for="Capacidade">
-            <span asp-validation-for="Capacidade" class="text-danger"></span>
+            <label asp-for="Cpf" class="form-label">CPF</label>
+            <input class="form-control" asp-for="Cpf">
+            <span asp-validation-for="Cpf" class="text-danger"></span>
         </div>
 
         <div class="d-flex gap-2 justify-content-end">

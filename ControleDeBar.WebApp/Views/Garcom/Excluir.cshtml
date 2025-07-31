@@ -1,22 +1,14 @@
 ﻿@{
-    ViewBag.Titulo = "Cadastro de Mesa";
+    ViewBag.Titulo = "Exclusão de Garçom";
 }
 
-@model CadastrarMesaViewModel;
+@model ExcluirGarcomViewModel;
 
 <div class="row justify-content-center">
-    <form class="col-6" asp-action="Cadastrar" method="post">
-        <div class="mb-3">
-            <label asp-for="Numero" class="form-label">Número</label>
-            <input class="form-control" asp-for="Numero">
-            <span asp-validation-for="Numero" class="text-danger"></span>
-        </div>
+    <form class="col-6" asp-action="Excluir" method="post">
+        <p>Deseja realmente excluir o garçom "@Model.Nome"?</p>
 
-        <div class="mb-3">
-            <label asp-for="Capacidade" class="form-label">Capacidade de Lugares</label>
-            <input class="form-control" asp-for="Capacidade">
-            <span asp-validation-for="Capacidade" class="text-danger"></span>
-        </div>
+        <input asp-for="Nome" type="hidden" />
 
         <div class="d-flex gap-2 justify-content-end">
             <a asp-action="Index" class="btn btn-outline-primary px-5">Voltar</a>

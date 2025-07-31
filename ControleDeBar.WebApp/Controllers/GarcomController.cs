@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ControleDeBar.WebApp.Controllers;
 
-public class MesaController : Controller
+public class GarcomController : Controller
 {
     private readonly RepositorioGarcomEmArquivo repositorioGarcom;
 
-    public MesaController()
+    public GarcomController()
     {
         ContextoDados contexto = new ContextoDados(carregarDados: true);
 
@@ -20,9 +20,9 @@ public class MesaController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        List<Mesa> mesas = repositorioGarcom.SelecionarRegistros();
+        List<Garcom> garcons = repositorioGarcom.SelecionarRegistros();
 
-        VisualizarMesasViewModel visualizarVm = new VisualizarGarcomViewModel(mesas);
+        VisualizarGarcomViewModel visualizarVm = new VisualizarGarcomViewModel(garcons);
 
         return View(visualizarVm);
     }
@@ -30,20 +30,20 @@ public class MesaController : Controller
     [HttpGet]
     public IActionResult Cadastrar()
     {
-        CadastrarMesaViewModel cadastrarVm = new CadastrarMesaViewModel();
+        CadastrarGarcomViewModel cadastrarVm = new CadastrarGarcomViewModel();
 
         return View(cadastrarVm);
     }
 
     [HttpPost]
-    public IActionResult Cadastrar(CadastrarMesaViewModel cadastrarVm)
+    public IActionResult Cadastrar(CadastrarGarcomViewModel cadastrarVm)
     {
         if (!ModelState.IsValid)
             return View(cadastrarVm);
 
-        var entidade = new Mesa(cadastrarVm.Numero, cadastrarVm.Capacidade);
+        var entidade = new Garcom(cadastrarVm.Nome, cadastrarVm.Cpf);
 
-        repositorioMesa.CadastrarRegistro(entidade);
+        repositorioGarcom.CadastrarRegistro(entidade);
 
         return RedirectToAction(nameof(Index));
     }

@@ -1,8 +1,7 @@
-﻿
-using ControleDeBar.Dominio.ModuloGarcom;
+﻿using ControleDeBar.Dominio.ModuloGarcom;
 using ControleDeBar.Infraestrutura.Arquivos.Compartilhado;
 
-namespace ControleDeBar.Infraestrutura.Arquivos.ModuloGarcoma;
+namespace ControleDeBar.Infraestrutura.Arquivos.ModuloGarcom;
 
 public class RepositorioGarcomEmArquivo : RepositorioBaseEmArquivo<Garcom>
 {
