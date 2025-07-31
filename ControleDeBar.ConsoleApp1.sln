@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeBar.Infraestrutur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeBar.Infraestrutura.Arquivos", "ControleDeBar.Infraestrutura.Arquivos\ControleDeBar.Infraestrutura.Arquivos.csproj", "{99CC503A-E2DC-4FF4-BB8E-D7E6AAA40258}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeBar.WebApp", "ControleDeBar.WebApp\ControleDeBar.WebApp.csproj", "{27445BCF-3093-4929-AC01-0443895BEC0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{99CC503A-E2DC-4FF4-BB8E-D7E6AAA40258}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99CC503A-E2DC-4FF4-BB8E-D7E6AAA40258}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99CC503A-E2DC-4FF4-BB8E-D7E6AAA40258}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27445BCF-3093-4929-AC01-0443895BEC0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27445BCF-3093-4929-AC01-0443895BEC0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27445BCF-3093-4929-AC01-0443895BEC0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27445BCF-3093-4929-AC01-0443895BEC0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{9B376C25-76FB-4AF2-A505-9F7F2E9A1430} = {0065C928-4D51-4A49-B684-11CCD9FD31E2}
 		{EF699DB5-45D0-4B05-8C22-9348B60AA273} = {564685E6-BE98-489F-8C3B-E0090A400FC6}
 		{99CC503A-E2DC-4FF4-BB8E-D7E6AAA40258} = {564685E6-BE98-489F-8C3B-E0090A400FC6}
+		{27445BCF-3093-4929-AC01-0443895BEC0A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92EEB372-948F-4DA8-9F10-EBED689F9EE4}
