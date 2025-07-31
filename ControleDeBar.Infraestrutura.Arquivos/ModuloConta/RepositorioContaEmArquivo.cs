@@ -3,7 +3,7 @@ using ControleDeBar.Dominio.ModuloConta;
 
 namespace ControleDeBar.Infraestrutura.Memoria.ModuloConta;
 
-public class RepositorioConta
+public class RepositorioContaEmArquivo
 {
     protected List<Conta> registros = new List<Conta>();
     protected int contadorIds = 0;
