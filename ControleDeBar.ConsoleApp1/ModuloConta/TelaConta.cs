@@ -1,7 +1,7 @@
 using ControleDeBar.ConsoleApp.Compartilhado;
 using ControleDeBar.Dominio.ModuloConta;
 using ControleDeBar.Dominio.ModuloGarcom;
-using ControleDeBar.Dominio.ModuloMesa;
+using ControleDeBar.Dominio.ModuloGarcom;
 using ControleDeBar.Dominio.ModuloProduto;
 using ControleDeBar.Infraestrutura.Memoria.ModuloConta;
 using ControleDeBar.Infraestrutura.Memoria.ModuloGarcom;

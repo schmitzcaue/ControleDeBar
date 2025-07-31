@@ -2,7 +2,7 @@
 using ControleDeBar.ConsoleApp.ModuloMesa;
 using ControleDeBar.ConsoleApp.ModuloProduto;
 using ControleDeBar.Dominio.ModuloGarcom;
-using ControleDeBar.Dominio.ModuloMesa;
+using ControleDeBar.Dominio.ModuloGarcom;
 using ControleDeBar.Dominio.ModuloProduto;
 using ControleDeBar.Infraestrutura.Memoria.ModuloConta;
 using ControleDeBar.Infraestrutura.Memoria.ModuloGarcom;

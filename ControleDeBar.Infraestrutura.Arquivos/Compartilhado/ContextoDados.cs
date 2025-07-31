@@ -1,6 +1,6 @@
 ﻿using ControleDeBar.Dominio.ModuloConta;
 using ControleDeBar.Dominio.ModuloGarcom;
-using ControleDeBar.Dominio.ModuloMesa;
+using ControleDeBar.Dominio.ModuloGarcom;
 using ControleDeBar.Dominio.ModuloProduto;
 using System.Text.Json;
 using System.Text.Json.Serialization;

@@ -1,6 +1,6 @@
 ﻿using ControleDeBar.Dominio.Compartilhado;
 
-namespace ControleDeBar.Dominio.ModuloMesa;
+namespace ControleDeBar.Dominio.ModuloGarcom;
 
 public class Mesa : EntidadeBase<Mesa>
 {

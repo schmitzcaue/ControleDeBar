@@ -14,6 +14,15 @@ public abstract class RepositorioBaseEmArquivo<Tipo> where Tipo : EntidadeBase<T
         this.contextoDados = contextoDados;
 
 
+        int maiorId = 0;
+
+        foreach (Tipo registro in registros)
+        {
+            if (registro.Id > maiorId)
+                maiorId = registro.Id;
+        }
+
+        contadorIds = maiorId;
         registros = ObterRegistros();
     }
 

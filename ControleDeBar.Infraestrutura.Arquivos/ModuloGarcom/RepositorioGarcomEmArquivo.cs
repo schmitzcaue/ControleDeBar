@@ -1,6 +1,17 @@
-﻿//using ControleDeBar.Dominio.ModuloGarcom;
-//using ControleDeBar.Infraestrutura.Memoria.Compartilhado;
+﻿
+using ControleDeBar.Dominio.ModuloGarcom;
+using ControleDeBar.Infraestrutura.Arquivos.Compartilhado;
 
-//namespace ControleDeBar.Infraestrutura.Memoria.ModuloGarcom;
+namespace ControleDeBar.Infraestrutura.Arquivos.ModuloGarcoma;
 
-//public class RepositorioGarcomEmArquivo : RepositorioBase<Garcom>;
+public class RepositorioGarcomEmArquivo : RepositorioBaseEmArquivo<Garcom>
+{
+    public RepositorioGarcomEmArquivo(ContextoDados contextoDados) : base(contextoDados)
+    {
+    }
+
+    protected override List<Garcom> ObterRegistros()
+    {
+        return contextoDados.Garcons;
+    }
+}

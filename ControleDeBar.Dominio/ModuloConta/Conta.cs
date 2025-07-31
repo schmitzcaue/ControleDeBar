@@ -1,6 +1,6 @@
 using ControleDeBar.Dominio.Compartilhado;
 using ControleDeBar.Dominio.ModuloGarcom;
-using ControleDeBar.Dominio.ModuloMesa;
+using ControleDeBar.Dominio.ModuloGarcom;
 using ControleDeBar.Dominio.ModuloProduto;
 
 namespace ControleDeBar.Dominio.ModuloConta;
