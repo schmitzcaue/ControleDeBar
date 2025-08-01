@@ -1,6 +1,6 @@
 using ControleDeBar.Dominio.ModuloGarcom;
 using ControleDeBar.Infraestrutura.Arquivos.Compartilhado;
-using ControleDeBar.Infraestrutura.Arquivos.ModuloGarcoma;
+using ControleDeBar.Infraestrutura.Arquivos.ModuloGarcom;
 using ControleDeBar.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,9 +12,8 @@ public class GarcomController : Controller
 
     public GarcomController()
     {
-        ContextoDados contexto = new ContextoDados(carregarDados: true);
-
-        repositorioGarcom = new RepositorioGarcomEmArquivo(contexto);
+        ContextoDados contextoDados = new ContextoDados(carregarDados: true);
+        repositorioGarcom = new RepositorioGarcomEmArquivo(contextoDados);
     }
 
     [HttpGet]
@@ -22,7 +21,7 @@ public class GarcomController : Controller
     {
         List<Garcom> garcons = repositorioGarcom.SelecionarRegistros();
 
-        VisualizarGarcomViewModel visualizarVm = new VisualizarGarcomViewModel(garcons);
+        VisualizarGarconsViewModel visualizarVm = new VisualizarGarconsViewModel(garcons);
 
         return View(visualizarVm);
     }
@@ -44,6 +43,54 @@ public class GarcomController : Controller
         var entidade = new Garcom(cadastrarVm.Nome, cadastrarVm.Cpf);
 
         repositorioGarcom.CadastrarRegistro(entidade);
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    public IActionResult Editar(int id)
+    {
+        var registro = repositorioGarcom.SelecionarRegistroPorId(id);
+
+        EditarGarcomViewModel editarVm = new EditarGarcomViewModel(
+            id,
+            registro.Nome,
+            registro.Cpf
+        );
+
+        return View(editarVm);
+    }
+
+    [HttpPost]
+    public IActionResult Editar(EditarGarcomViewModel editarVm)
+    {
+        if (!ModelState.IsValid)
+            return View(editarVm);
+
+        var garcomEditado = new Garcom(editarVm.Nome, editarVm.Cpf);
+
+        repositorioGarcom.EditarRegistro(editarVm.Id, garcomEditado);
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    public IActionResult Excluir(int id)
+    {
+        var registro = repositorioGarcom.SelecionarRegistroPorId(id);
+
+        ExcluirGarcomViewModel excluirVm = new ExcluirGarcomViewModel(
+            id,
+            registro.Nome
+        );
+
+        return View(excluirVm);
+    }
+
+    [HttpPost]
+    public IActionResult Excluir(ExcluirGarcomViewModel excluirVm)
+    {
+        repositorioGarcom.ExcluirRegistro(excluirVm.Id);
 
         return RedirectToAction(nameof(Index));
     }
