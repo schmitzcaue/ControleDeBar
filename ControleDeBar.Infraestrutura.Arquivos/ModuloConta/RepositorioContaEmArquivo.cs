@@ -1,23 +1,17 @@
-
 using ControleDeBar.Dominio.ModuloConta;
+using ControleDeBar.Infraestrutura.Arquivos.Compartilhado;
 
-namespace ControleDeBar.Infraestrutura.Memoria.ModuloConta;
+namespace ControleDeBar.Infraestrutura.Arquivos.ModuloConta;
 
-public class RepositorioContaEmArquivo
+public class RepositorioContaEmArquivo : RepositorioBaseEmArquivo<Conta>
 {
-    protected List<Conta> registros = new List<Conta>();
-    protected int contadorIds = 0;
-
-    public void Cadastrar(Conta novaConta)
+    public RepositorioContaEmArquivo(ContextoDados contextoDados) : base(contextoDados)
     {
-        novaConta.Id = ++contadorIds;
-
-        registros.Add(novaConta);
     }
 
-    public List<Conta> SelecionarContas()
+    protected override List<Conta> ObterRegistros()
     {
-        return registros;
+        return contextoDados.Contas;
     }
 
     public List<Conta> SelecionarContasPorData(DateTime dataFaturamento)
@@ -57,16 +51,5 @@ public class RepositorioContaEmArquivo
         }
 
         return contasFechadas;
-    }
-
-    public Conta SelecionarContaPorId(int idSelecionado)
-    {
-        foreach (Conta conta in registros)
-        {
-            if (conta.Id == idSelecionado)
-                return conta;
-        }
-
-        return null;
     }
 }
