@@ -1,20 +1,27 @@
-﻿using ControleDeBar.Dominio.ModuloGarcom;
-using ControleDeBar.Dominio.ModuloProduto;
+﻿using ControleDeBar.Dominio.ModuloProduto;
 using System.ComponentModel.DataAnnotations;
 
 namespace ControleDeBar.WebApp.Models;
 
 public class CadastrarProdutoViewModel
 {
-
-    [Range(1, 1000, ErrorMessage = "O campo \"Nome\" precisa conter um valor entre 1 e 100.")]
+    [Required(ErrorMessage = "O campo \"Nome\" é obrigatório.")]
+    [MinLength(3, ErrorMessage = "O campo \"Nome\" precisa conter ao menos 3 caracteres.")]
+    [MaxLength(100, ErrorMessage = "O campo \"Nome\" precisa conter no máximo 100 caracteres.")]
     public string Nome { get; set; }
 
-    [Range(1, 1000, ErrorMessage = "O campo \"Preço\" precisa conter um valor entre 1 e 1000.")]
-    public Decimal Preco { get; set; }
+    [Required(ErrorMessage = "O campo \"Valor\" é obrigatório.")]
+    [DataType(DataType.Currency)]
+    [Range(0, double.MaxValue,
+        ErrorMessage = "O campo \"Valor\" precisa conter um valor positivo.")]
+    public decimal Preco { get; set; }
 
-    public CadastrarProdutoViewModel()
+    public CadastrarProdutoViewModel() { }
+
+    public CadastrarProdutoViewModel(string nome, decimal preco) : this()
     {
+        Nome = nome;
+        Preco = preco;
     }
 }
 
@@ -22,15 +29,19 @@ public class EditarProdutoViewModel
 {
     public int Id { get; set; }
 
-    [Range(1, 1000, ErrorMessage = "O campo \"Nome\" precisa conter um valor entre 1 e 100.")]
+    [Required(ErrorMessage = "O campo \"Nome\" é obrigatório.")]
+    [MinLength(3, ErrorMessage = "O campo \"Nome\" precisa conter ao menos 3 caracteres.")]
+    [MaxLength(100, ErrorMessage = "O campo \"Nome\" precisa conter no máximo 100 caracteres.")]
     public string Nome { get; set; }
 
-    [Range(1, 1000, ErrorMessage = "O campo \"Preço\" precisa conter um valor entre 1 e 1000.")]
-    public Decimal Preco { get; set; }
-
+    [Required(ErrorMessage = "O campo \"Valor\" é obrigatório.")]
+    [DataType(DataType.Currency)]
+    [Range(0, double.MaxValue,
+        ErrorMessage = "O campo \"Preço\" precisa conter um valor positivo.")]
+    public decimal Preco { get; set; }
     public EditarProdutoViewModel() { }
 
-    public EditarProdutoViewModel(int id, string nome, Decimal preco)
+    public EditarProdutoViewModel(int id, string nome, decimal preco) : this()
     {
         Id = id;
         Nome = nome;
@@ -41,7 +52,6 @@ public class EditarProdutoViewModel
 public class ExcluirProdutoViewModel
 {
     public int Id { get; set; }
-
     public string Nome { get; set; }
 
     public ExcluirProdutoViewModel() { }
@@ -55,19 +65,21 @@ public class ExcluirProdutoViewModel
 
 public class VisualizarProdutosViewModel
 {
-    public List<DetalhesProdutoViewModel> Registros { get; set; } = new List<DetalhesProdutoViewModel>();
+    public List<DetalhesProdutoViewModel> Registros { get; set; }
 
     public VisualizarProdutosViewModel(List<Produto> produtos)
     {
-        foreach (Produto p in produtos)
+        Registros = new List<DetalhesProdutoViewModel>();
+
+        foreach (var p in produtos)
         {
-            DetalhesProdutoViewModel detalhesVm = new DetalhesProdutoViewModel(
+            DetalhesProdutoViewModel produtoVm = new DetalhesProdutoViewModel(
                 p.Id,
                 p.Nome,
                 p.Preco
             );
 
-            Registros.Add(detalhesVm);
+            Registros.Add(produtoVm);
         }
     }
 }
@@ -85,3 +97,16 @@ public class DetalhesProdutoViewModel
         Preco = preco;
     }
 }
+//public class DetalhesProdutoViewModel
+//{
+//    public int Id { get; set; }
+//    public string Nome { get; set; }
+//    public decimal Preco { get; set; }
+
+//    public DetalhesProdutoViewModel(int id, string nome, decimal preco)
+//    {
+//        Id = id;
+//        Nome = nome;
+//        Preco = preco;
+//    }
+//}

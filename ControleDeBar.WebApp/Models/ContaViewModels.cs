@@ -1,6 +1,7 @@
 ﻿using ControleDeBar.Dominio.ModuloConta;
 using ControleDeBar.Dominio.ModuloGarcom;
 //using ControleDeBar.Dominio.ModuloMesa;
+using ControleDeBar.Dominio.ModuloProduto;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
@@ -111,20 +112,57 @@ public class DetalhesContaViewModel
             Pedidos.Add(pedidoVM);
         }
     }
-}
 
-public class PedidoContaViewModel
-{
-    public int Id { get; set; }
-    public string Produto { get; set; }
-    public int QuantidadeSolicitada { get; set; }
-    public decimal TotalParcial { get; set; }
 
-    public PedidoContaViewModel(int id, string produto, int quantidadeSolicitada, decimal totalParcial)
+    public class PedidoContaViewModel
     {
-        Id = id;
-        Produto = produto;
-        QuantidadeSolicitada = quantidadeSolicitada;
-        TotalParcial = totalParcial;
+        public int Id { get; set; }
+        public string Produto { get; set; }
+        public int QuantidadeSolicitada { get; set; }
+        public decimal TotalParcial { get; set; }
+
+        public PedidoContaViewModel(int id, string produto, int quantidadeSolicitada, decimal totalParcial)
+        {
+            Id = id;
+            Produto = produto;
+            QuantidadeSolicitada = quantidadeSolicitada;
+            TotalParcial = totalParcial;
+        }
+    }
+
+    public class GerenciarPedidosViewModel
+    {
+        public DetalhesContaViewModel Conta { get; set; }
+        public List<SelectListItem> ProdutosDisponiveis { get; set; }
+
+        public GerenciarPedidosViewModel() { }
+
+        public GerenciarPedidosViewModel(Conta conta, List<Produto> produtos) : this()
+        {
+            Conta = new DetalhesContaViewModel(
+                conta.Id,
+                conta.Titular,
+                conta.Mesa.Numero,
+                conta.Garcom.Nome,
+                conta.EstaAberta,
+                conta.CalcularValorTotal(),
+                conta.Pedidos
+            );
+
+            ProdutosDisponiveis = new List<SelectListItem>();
+
+            foreach (var p in produtos)
+            {
+                var selectItem = new SelectListItem(p.Nome, p.Id.ToString());
+
+                ProdutosDisponiveis.Add(selectItem);
+            }
+        }
+    }
+
+    public class AdicionarPedidoViewModel
+    {
+        public int IdProduto { get; set; }
+        public int QuantidadeSolicitada { get; set; }
     }
 }
