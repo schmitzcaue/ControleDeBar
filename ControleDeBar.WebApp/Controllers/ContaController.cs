@@ -33,10 +33,16 @@ public class ContaController : Controller
 
 
     [HttpGet]
-    public IActionResult Index()
+    public IActionResult Index(string? status)
     {
-        List<Conta> contas = repositorioConta.SelecionarRegistros();
+        List<Conta> contas;
 
+        switch (status)
+        {
+            case "abertas": contas = repositorioConta.SelecionarContasEmAberto(); break;
+            case "fechadas": contas = repositorioConta.SelecionarContasFechadas(); break;
+            default: contas = repositorioConta.SelecionarRegistros(); break;
+        }
         VisualizarContasViewModel visualizarContasVm = new VisualizarContasViewModel(contas);
 
         return View(visualizarContasVm);
