@@ -9,6 +9,7 @@ using ControleDeBar.Infraestrutura.Arquivos.ModuloMesa;
 using ControleDeBar.Infraestrutura.Arquivos.ModuloProduto;
 using ControleDeBar.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using static ControleDeBar.WebApp.Models.DetalhesContaViewModel;
 
 namespace ControleDeBar.WebApp.Controllers;
 
@@ -71,6 +72,35 @@ public class ContaController : Controller
 
         return RedirectToAction(nameof(Index));
     }
+    [HttpGet]
+    public IActionResult Fechar(int id)
+    {
+        Conta contaSelecionada = repositorioConta.SelecionarRegistroPorId(id);
+
+        FecharContaViewModel fecharContaVm = new FecharContaViewModel(
+            contaSelecionada.Id,
+            contaSelecionada.Titular,
+            contaSelecionada.Mesa.Numero,
+            contaSelecionada.Garcom.Nome,
+            contaSelecionada.CalcularValorTotal(),
+            contaSelecionada.Pedidos
+        );
+
+        return View(fecharContaVm);
+    }
+
+    [HttpPost]
+    public IActionResult FecharConfirmado(int id)
+    {
+        Conta contaSelecionada = repositorioConta.SelecionarRegistroPorId(id);
+
+        contaSelecionada.Fechar();
+
+        contextoDados.Salvar();
+
+        return RedirectToAction(nameof(Index));
+    }
+
 
     [HttpGet]
     public IActionResult GerenciarPedidos(int id)

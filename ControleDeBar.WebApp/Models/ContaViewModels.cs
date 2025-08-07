@@ -4,6 +4,7 @@ using ControleDeBar.Dominio.ModuloGarcom;
 using ControleDeBar.Dominio.ModuloProduto;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using static ControleDeBar.WebApp.Models.DetalhesContaViewModel;
 
 namespace ControleDeBar.WebApp.Models;
 
@@ -46,6 +47,47 @@ public class AbrirContaViewModel
     }
 }
 
+public class FecharContaViewModel
+{
+    public int Id { get; set; }
+    public string Titular { get; set; }
+    public int Mesa { get; set; }
+    public string Garcom { get; set; }
+    public decimal ValorTotal { get; set; }
+    public List<PedidoContaViewModel> Pedidos { get; set; }
+
+    public FecharContaViewModel() { }
+
+    public FecharContaViewModel(
+        int id,
+        string titular,
+        int mesa,
+        string garcom,
+        decimal valorTotal,
+        List<Pedido> pedidos
+    )
+    {
+        Id = id;
+        Titular = titular;
+        Mesa = mesa;
+        Garcom = garcom;
+        ValorTotal = valorTotal;
+
+        Pedidos = new List<PedidoContaViewModel>();
+
+        foreach (var item in pedidos)
+        {
+            var pedidoVM = new PedidoContaViewModel(
+                item.Id,
+                item.Produto.Nome,
+                item.QuantidadeSolicitada,
+                item.CalcularTotalParcial()
+            );
+
+            Pedidos.Add(pedidoVM);
+        }
+    }
+}
 public class VisualizarContasViewModel
 {
     public List<DetalhesContaViewModel> Registros { get; set; }
