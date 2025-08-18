@@ -13,9 +13,12 @@ public class ContextoDados
     public List<Garcom> Garcons { get; set; } = new List<Garcom>();
     public List<Produto> Produtos { get; set; } = new List<Produto>();
     public List<Conta> Contas { get; set; } = new List<Conta>();
-
-    private string pastaArmazenamento = "C:\\temp";
-    private string arquivoArmazenamento = "dados-controle-bar.json";
+    
+    private string pastaArmazenamento = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+        "ControleDeBar"
+    );
+    private string arquivoArmazenamento = "dados.json";
 
     public ContextoDados() { }
 
@@ -27,7 +30,6 @@ public class ContextoDados
 
     public void Salvar()
     {
-        // C:\temp\dados-controle-bar.json
         string caminhoCompleto = Path.Combine(pastaArmazenamento, arquivoArmazenamento);
 
         JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
