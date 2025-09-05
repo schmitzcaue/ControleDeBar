@@ -409,9 +409,9 @@ public class TelaConta : ITela
             "Id", "Produto", "Quantidade", "Valor Parcial"
         );
 
-        Pedido[] pedidos = conta.Pedidos;
+        var pedidos = conta.Pedidos;
 
-        for (int i = 0; i < pedidos.Length; i++)
+        for (int i = 0; i < pedidos.Count; i++)
         {
             Pedido p = pedidos[i];
 
